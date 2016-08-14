@@ -1,2 +1,4 @@
 # sketches
-start up repository for learning
+start-up repository for learning
+
+will try some test scripts here
