@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+import argparse
+import subprocess
+import sys
+import os
+from ififuncs import hashlib_md5
+from glob import glob
+from sys import platform as _platform
+
 if [ "${#}" = 0 ] ; then echo " drag and drop a file" ; exit
 else
 
