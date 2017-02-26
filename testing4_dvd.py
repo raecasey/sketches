@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/usr/bin/env python
 
 if [ "${#}" = 0 ] ; then echo " drag and drop a file" ; exit
 else
