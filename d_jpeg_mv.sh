@@ -1,7 +1,10 @@
 #!/bin/bash
+#script written by Raelene Casey 2024
 
-#JPEGS
-	#jpg
+echo 'PLEASE READ TERMINAL OUTPUT CAREFULLY'
+
+#check if the current folder contains any files with jpg extension. If it does then create two folders and
+move the jpg files to one of them
 if ls *.jpg 1> /dev/null 2>&1; then 
 	mkdir metadata_jpeg
 	mkdir objects_jpeg
@@ -9,7 +12,9 @@ if ls *.jpg 1> /dev/null 2>&1; then
 else
 	echo 'no file with jpg extension is present in current directory'
 fi
-	#jpeg
+
+#check if the current folder contains any files with jpeg extension. If it does then create two folders and
+move the jpeg files to one of them. (If the folders already exist the script moves on to the move command)
 if ls *.jpeg 1> /dev/null 2>&1; then 
 	mkdir metadata_jpeg 
 	mkdir objects_jpeg 
@@ -18,7 +23,8 @@ else
 	echo 'no file with jpeg extension is present in current directory'
 fi
 
-	#JPG
+#check if the current folder contains any files with JPG extension. If it does then create two folders and
+move the JPG files to one of them. (If the folders already exist the script moves on to the move command)
 if ls *.JPG 1> /dev/null 2>&1; then 
 	mkdir metadata_jpeg 
 	mkdir objects_jpeg 
@@ -27,7 +33,8 @@ else
 	echo 'no file with JPG extension is present in current directory'
 fi
 
-	#JPEG
+#check if the current folder contains any files with JPEG extension. If it does then create two folders and
+move the JPEG files to one of them. If the folders already exist the script moves on to the move command.
 if ls *.JPEG 1> /dev/null 2>&1; then 
 	mkdir metadata_jpeg 
 	mkdir objects_jpeg 
@@ -35,3 +42,4 @@ if ls *.JPEG 1> /dev/null 2>&1; then
 else
 	echo 'no file with JPEG extension is present in current directory'
 fi
+echo 'THIS SCRIPT IS NOT RECURSIVE'
