@@ -48,6 +48,7 @@ batch script
 halves the pixel height and width of all image files in current directory. 
 this script requires user to cd into the same directory as the image files
 this script is not recursive.
+## info on dependencies
 #### exiftool is dependency for
 dsortinghat_jpeg.sh
 
