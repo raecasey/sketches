@@ -1,16 +1,19 @@
-# sketches
-start-up repository for learning
-
+## repository
 # exiftool is dependency for
 d_jpeg_ipsort
+
 d_jpeg.mv.sh
 # fmpeg is a dependency for
 dep_im_309h.sh
+
 dep_im_309w.sh
+
 dep_im_double.sh
+
 dep_im_half.sh  
 # d_jpeg_ipsort
-identifies if there are any versions of jpeg files in the current directory and packages them into an information package.
+identifies if there are any versions of jpeg files in the current directory.
+packages them into an information package named ip_jpeg with extracted exiftool metadata files
 this script requires user to be in the same directory as the jpeg files
 this script is not recursive. 
 # dep_im_309h.sh
