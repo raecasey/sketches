@@ -25,7 +25,7 @@ identifies if there are any versions of iiq files in the current directory.
 packages them into an information package named ip_jpeg with extracted exiftool metadata files
 this script requires user to be in the same directory as the iiq files
 this script is not recursive.
-## image resizing scrpts
+## image resizing scripts
 ### dep_im_309h.sh
 batch script
 resizes all image files in current directory to the height of 309 pixels. 
