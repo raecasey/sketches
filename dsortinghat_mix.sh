@@ -1,6 +1,6 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
-#checks if there are any instances of jpegs in current directory. if jpegs are found they are sorted into an information package with exiftool metadata extracted.
+#looks for Jpegs, Tiffs, DNGs, IIQs and PNGs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
 
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 #JPEGS SORT
