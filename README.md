@@ -33,7 +33,7 @@ batch script
 doubles the pixel height and width of all image files in current directory. 
 this script requires user to cd into the same directory as the image files
 this script is not recursive.
-# dep_im_half.sh
+### dep_im_half.sh
 batch script
 halves the pixel height and width of all image files in current directory. 
 this script requires user to cd into the same directory as the image files
