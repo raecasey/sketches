@@ -1,9 +1,9 @@
 # repository
-## exiftool is dependency for
+#### exiftool is dependency for
 d_jpeg_ipsort
 
 d_jpeg.mv.sh
-## fmpeg is a dependency for
+#### fmpeg is a dependency for
 dep_im_309h.sh
 
 dep_im_309w.sh
