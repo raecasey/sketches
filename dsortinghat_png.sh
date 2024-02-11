@@ -5,7 +5,7 @@
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 
 #check if any PNGs in different extensions exist in the current folder. If any exist make three folders
-ls *.png 1> /dev/null 2>&1 || ls *.PNG 1> /dev/null 2>&1; then 
+if ls *.png 1> /dev/null 2>&1 || ls *.PNG 1> /dev/null 2>&1; then 
 	echo 'PNGs are present'
 	mkdir png_ip
 	mkdir metadata_png
