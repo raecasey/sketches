@@ -1,12 +1,12 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
-#checks if there are any instances of jpegs in current directory. if jpegs are found a folder is created and the jpegs are moved into the folder.
-
+#checks if there are any instances of jpegs in current directory. if jpegs are found they are sorted into an information package with exiftool metadata extracted.
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 
 #check if any Jpegs in different extensions exist in the current folder. If any exist make two folders
 if ls *.jpg 1> /dev/null || ls *.jpeg 1> /dev/null || ls *.JPG 1> /dev/null 2>&1; then 
 	echo 'Jpegs are present'
+ 	mkdir jpeg_ip
 	mkdir metadata_jpeg
 	mkdir objects_jpeg  
 else
@@ -51,6 +51,17 @@ if ls *.JPEG 1> /dev/null 2>&1; then
 	mv *.JPEG ./objects_jpeg  
 else
 	echo 'no file with JPEG extension found in current directory'
+fi
+
+#move and rename files into information package
+if ls jpeg_ip; then
+	mv metadata_jpeg jpeg_ip
+	mv objects_jpeg jpeg_ip
+	mv jpeg_ip/metadata_jpeg jpeg_ip/metadata
+	mv jpeg_ip/objects_jpeg jpeg_ip/objects
+	echo 'jpeg information package created'
+else
+	echo 'no jpeg information package created'
 fi
 
 echo 'THIS SCRIPT IS NOT RECURSIVE'
