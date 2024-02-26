@@ -40,6 +40,8 @@ if ls iiq_ip; then
 	mv objects_iiq iiq_ip
 	mv iiq_ip/metadata_iiq iiq_ip/metadata
 	mv iiq_ip/objects_iiq iiq_ip/objects
+ #requires ifiscripts as a dependency or script will break
+ 	manifest.py -s iiq_ip/objects
 	echo 'iiq information package created'
 else
 	echo 'no iiq information package created'
