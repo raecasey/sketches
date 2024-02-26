@@ -59,6 +59,8 @@ if ls jpeg_ip; then
 	mv objects_jpeg jpeg_ip
 	mv jpeg_ip/metadata_jpeg jpeg_ip/metadata
 	mv jpeg_ip/objects_jpeg jpeg_ip/objects
+ #requires ifiscripts as a dependency or script will break
+ 	manifest.py -s jpeg_ip/objects
 	echo 'jpeg information package created'
 else
 	echo 'no jpeg information package created'
