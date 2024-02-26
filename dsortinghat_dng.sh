@@ -40,6 +40,8 @@ if ls dng_ip; then
 	mv objects_dng dng_ip
 	mv dng_ip/metadata_dng dng_ip/metadata
 	mv dng_ip/objects_dng dng_ip/objects
+ #requires ifiscripts as a dependency or script will break
+ 	manifest.py -s dng_ip/objects
 	echo 'dng information package created'
 else
 	echo 'no dng information package created'
