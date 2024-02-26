@@ -40,6 +40,8 @@ if ls png_ip; then
 	mv objects_png png_ip
 	mv png_ip/metadata_png png_ip/metadata
 	mv png_ip/objects_png png_ip/objects
+ #needs ifiscripts as a dependency or the script will fail. need to make the creation of the manifest.py step an option or an if then else
+ 	manifest.py - s png_ip/objects
 	echo 'png information package created'
 else
 	echo 'no png information package created'
