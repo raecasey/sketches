@@ -205,6 +205,8 @@ if ls jpeg_ip; then
 	mv objects_jpeg jpeg_ip
 	mv jpeg_ip/metadata_jpeg jpeg_ip/metadata
 	mv jpeg_ip/objects_jpeg jpeg_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s jpeg_ip/objects
 	echo 'jpeg information package created'
 else
 	echo 'no jpeg information package created'
@@ -216,6 +218,8 @@ if ls tiff_ip; then
 	mv objects_tiff tiff_ip
 	mv tiff_ip/metadata_tiff tiff_ip/metadata
 	mv tiff_ip/objects_tiff tiff_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s tiff_ip/objects
 	echo 'tiff information package created'
 else
 	echo 'no tiff information package created'
@@ -227,6 +231,8 @@ if ls dng_ip; then
 	mv objects_dng dng_ip
 	mv dng_ip/metadata_dng dng_ip/metadata
 	mv dng_ip/objects_dng dng_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s dng_ip/objects
 	echo 'dng information package created'
 else
 	echo 'no dng information package created'
@@ -238,6 +244,8 @@ if ls iiq_ip; then
 	mv objects_iiq iiq_ip
 	mv iiq_ip/metadata_iiq iiq_ip/metadata
 	mv iiq_ip/objects_iiq iiq_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s iiq_ip/objects
 	echo 'iiq information package created'
 else
 	echo 'no iiq information package created'
@@ -249,6 +257,8 @@ if ls png_ip; then
 	mv objects_png png_ip
 	mv png_ip/metadata_png png_ip/metadata
 	mv png_ip/objects_png png_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s png_ip/objects
 	echo 'png information package created'
 else
 	echo 'no png information package created'
