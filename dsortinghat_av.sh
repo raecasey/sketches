@@ -32,6 +32,8 @@ if ls *.mov 1> /dev/null 2>&1 || ls *.MOV 1> /dev/null 2>&1; then
 	mv objects_mov mov_ip
 	mv mov_ip/metadata_mov mov_ip/metadata
 	mv mov_ip/objects_mov mov_ip/objects
+      #ifiscripts is a dependency
+ 	manifest.py -s mov_ip/objects
 else
 	echo 'no QuickTime files found in current directory' 
 fi
@@ -57,6 +59,8 @@ if ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1; then
 	mv objects_mp4 mp4_ip
 	mv mp4_ip/metadata_mp4 mp4_ip/metadata
 	mv mp4_ip/objects_mp4 mp4_ip/objects
+     #ifiscripts is a dependency
+ 	manifest.py -s mp4_ip/objects
 else
 	echo 'no files with mp4/MP4 extension found in current directory' 
 fi
@@ -88,6 +92,8 @@ if ls *.wav 1> /dev/null 2>&1 || ls *.WAV 1> /dev/null 2>&1 || ls *.wave 1> /dev
 	mv objects_wav wav_ip
 	mv wav_ip/metadata_wav wav_ip/metadata
 	mv wav_ip/objects_wav wav_ip/objects
+       #ifiscripts is a dependency
+ 	manifest.py -s wav_ip/objects
 else
 	echo 'no wav/wave files found in current directory'
 fi
@@ -113,6 +119,8 @@ if ls *.mp3 1> /dev/null 2>&1 || ls *.MP3 1> /dev/null 2>&1; then
 	mv objects_mp3 mp3_ip
 	mv mp3_ip/metadata_mp3 mp3_ip/metadata
 	mv mp3_ip/objects_mp3 mp3_ip/objects
+      #ifiscripts is a dependency
+ 	manifest.py -s mp3_ip/objects
 else
 	echo 'no files with mp3/MP3 extension found in current directory'
 fi
@@ -138,6 +146,8 @@ if ls *.avi 1> /dev/null 2>&1 || ls *.AVI 1> /dev/null 2>&1; then
 	mv objects_avi avi_ip
 	mv avi_ip/metadata_avi avi_ip/metadata
 	mv avi_ip/objects_avi avi_ip/objects
+     #ifiscripts is a dependency
+ 	manifest.py -s avi_ip/objects
 else
 	echo 'no files with avi/AVI extension found in current directory'
 fi
@@ -163,6 +173,8 @@ if ls *.dv 1> /dev/null 2>&1 || ls *.DV 1> /dev/null 2>&1; then
 	mv objects_dv dv_ip
 	mv dv_ip/metadata_dv dv_ip/metadata
 	mv dv_ip/objects_dv dv_ip/objects
+    #ifiscripts is a dependency
+ 	manifest.py -s dv_ip/objects
 else
 	echo 'no files with dv/DV extension found in current directory'
 fi
@@ -188,6 +200,8 @@ if ls *.mkv 1> /dev/null 2>&1 || ls *.MKV 1> /dev/null 2>&1; then
 	mv objects_mkv mkv_ip
 	mv mkv_ip/metadata_mkv mkv_ip/metadata
 	mv mkv_ip/objects_mkv mkv_ip/objects
+   #ifiscripts is a dependency
+ 	manifest.py -s mkv_ip/objects
 else
 	echo 'no files with mkv/MKV extension found in current directory'
 fi
@@ -213,6 +227,8 @@ if ls *.mxf 1> /dev/null 2>&1 || ls *.MXF 1> /dev/null 2>&1; then
 	mv objects_mxf mxf_ip
 	mv mxf_ip/metadata_mxf mxf_ip/metadata
 	mv mxf_ip/objects_mxf mxf_ip/objects
+  #ifiscripts is a dependency
+ 	manifest.py -s mxf_ip/objects
 else
 	echo 'no files with mxf/MXF extension found in current directory'
 fi
@@ -238,6 +254,8 @@ if ls *.m4a 1> /dev/null 2>&1 || ls *.M4A 1> /dev/null 2>&1; then
 	mv objects_m4a m4a_ip
 	mv m4a_ip/metadata_m4a m4a_ip/metadata
 	mv m4a_ip/objects_m4a m4a_ip/objects
+ #ifiscripts is a dependency
+ 	manifest.py -s m4a_ip/objects
 else
 	echo 'no files with m4a/M4A extension found in current directory'
 fi
