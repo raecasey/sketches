@@ -71,3 +71,7 @@ dep_im_309w.sh
 dep_im_double.sh
 
 dep_im_half.sh 
+
+#### IFIScripts (https://ifiscripts.readthedocs.io/en/latest/) is a dependency for
+
+all dsortinghat.sh scripts
