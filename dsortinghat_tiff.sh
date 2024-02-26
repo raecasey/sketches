@@ -61,6 +61,8 @@ if ls tiff_ip; then
 	mv objects_tiff tiff_ip
 	mv tiff_ip/metadata_tiff tiff_ip/metadata
 	mv tiff_ip/objects_tiff tiff_ip/objects
+ #ifiscripts is a dependency or script will break
+ 	manifest.py -s tiff_ip/objects
 	echo 'tiff information package created'
 
 else
