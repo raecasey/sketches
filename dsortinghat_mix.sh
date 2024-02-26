@@ -1,6 +1,6 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
-#looks for Jpegs, Tiffs, DNGs, IIQs and PNGs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
+#looks for Jpegs, Tiffs, DNGs, IIQs, PNGs and PSDs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
 
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 #JPEGS SORT
@@ -198,6 +198,39 @@ else
 	echo 'no file with PNG extension found in current directory'
 fi
 
+#PSDS SORT
+#check if any PSDs in different extensions exist in the current folder. If any exist make three folders
+if ls *.psd 1> /dev/null 2>&1 || ls *.PSD 1> /dev/null 2>&1; then 
+	echo 'PSDs are present'
+	mkdir psd_ip
+	mkdir metadata_psd
+	mkdir objects_psd  
+else
+	echo 'there are no PSDs in this current directory'
+fi
+
+#check if .psd extension present. if so export .txt and .csv exiftool files to metadata_psd folder and move .psd files to objects_psd folder
+if ls *.psd 1> /dev/null 2>&1; then 
+	echo 'psd extension found'
+	for file in *.psd; do exiftool "$file" >"metadata_psd/${file%.psd}.psd.txt"; done
+	for file in *.psd; do exiftool -csv "$file" >"metadata_psd/${file%.psd}.psd.csv"; done
+	mv *.psd ./objects_psd  
+else
+	echo 'no files with psd extension found in current directory'
+fi
+
+#check if .PSD extension present. if so export .txt and .csv exiftool files to metadata_psd folder and move .PSD files to objects_psd folder
+if ls *.PSD 1> /dev/null 2>&1; then 
+	echo 'PSD extension found'
+	for file in *.PSD; do exiftool "$file" >"metadata_psd/${file%.PSD}.PSD.txt"; done
+	for file in *.PSD; do exiftool -csv "$file" >"metadata_psd/${file%.PSD}.PSD.csv"; done
+	mv *.PSD ./objects_psd  
+else
+	echo 'no file with PSD extension found in current directory'
+fi
+
+
+
 #move and rename files into information package
 #Jpeg Information Package
 if ls jpeg_ip; then
@@ -264,5 +297,17 @@ else
 	echo 'no png information package created'
 fi
 
+#PSD Information Package
+if ls psd_ip; then
+	mv metadata_psd psd_ip
+	mv objects_psd psd_ip
+	mv psd_ip/metadata_psd psd_ip/metadata
+	mv psd_ip/objects_psd psd_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s psd_ip/objects
+	echo 'psd information package created'
+else
+	echo 'no psd information package created'
+fi
 
 echo 'THIS SCRIPT IS NOT RECURSIVE'
