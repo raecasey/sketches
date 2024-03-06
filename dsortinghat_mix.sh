@@ -1,6 +1,6 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
-#looks for Jpegs, Tiffs, DNGs, IIQs, PNGs and PSDs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
+#looks for Jpegs, Tiffs, DNGs, IIQs, PNGs, NEFs and PSDs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
 
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 #JPEGS SORT
@@ -167,6 +167,37 @@ else
 	echo 'no file with IIQ extension found in current directory'
 fi
 
+#NEFS SORT
+#check if any NEFs in different extensions exist in the current folder. If any exist make three folders
+if ls *.nef 1> /dev/null 2>&1 || ls *.NEF 1> /dev/null 2>&1; then 
+	echo 'NEFs are present'
+	mkdir nef_ip
+	mkdir metadata_nef
+	mkdir objects_nef  
+else
+	echo 'there are no NEFs in this current directory'
+fi
+
+#check if .nef extension present. if so export .txt and .csv exiftool files to metadata_nef folder and move .nef files to objects_nef folder
+if ls *.nef 1> /dev/null 2>&1; then 
+	echo 'nef extension found'
+	for file in *.nef; do exiftool "$file" >"metadata_nef/${file%.nef}.nef.txt"; done
+	for file in *.nef; do exiftool -csv "$file" >"metadata_nef/${file%.nef}.nef.csv"; done
+	mv *.nef ./objects_nef  
+else
+	echo 'no files with nef extension found in current directory'
+fi
+
+#check if .NEF extension present. if so export .txt and .csv exiftool files to metadata_nef folder and move .NEF files to objects_nef folder
+if ls *.NEF 1> /dev/null 2>&1; then 
+	echo 'NEF extension found'
+	for file in *.NEF; do exiftool "$file" >"metadata_nef/${file%.NEF}.NEF.txt"; done
+	for file in *.NEF; do exiftool -csv "$file" >"metadata_nef/${file%.NEF}.NEF.csv"; done
+	mv *.NEF ./objects_nef  
+else
+	echo 'no file with NEF extension found in current directory'
+fi
+
 #PNGS SORT
 #check if any PNGs in different extensions exist in the current folder. If any exist make three folders
 if ls *.png 1> /dev/null 2>&1 || ls *.PNG 1> /dev/null 2>&1; then 
@@ -310,4 +341,16 @@ else
 	echo 'no psd information package created'
 fi
 
+#NEF Information Package
+if ls nef_ip; then
+	mv metadata_nef nef_ip
+	mv objects_nef nef_ip
+	mv nef_ip/metadata_nef nef_ip/metadata
+	mv nef_ip/objects_nef nef_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s nef_ip/objects
+	echo 'nef information package created'
+else
+	echo 'no nef information package created'
+fi
 echo 'THIS SCRIPT IS NOT RECURSIVE'
