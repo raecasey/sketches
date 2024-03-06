@@ -39,7 +39,7 @@ else
 fi
 
 #mp4s
-#check if mp4 extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
+#check if mpg and MPG extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
 if ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1; then 
 	echo 'mp4/MP4 extension found' | tee av_sort.log
 	#create folders for the information package
