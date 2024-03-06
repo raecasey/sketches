@@ -92,8 +92,7 @@ if ls *.mpg 1> /dev/null 2>&1 || ls *.MPG 1> /dev/null 2>&1; then
 	mv objects_mpeg_other mpeg_other_ip
 	mv mpeg_other_ip/metadata_mpeg_other mpeg_other_ip/metadata
 	mv mpeg_other_ip/objects_mpeg_other mpeg_other_ip/objects
-     #ifiscripts is a dependency
-     	cd mpeg_other_ip 
+     #ifiscripts is a dependency 
  	manifest.py -s objects
 else
 	echo 'no files with mp4/MP4 extension found in current directory' 
