@@ -5,7 +5,7 @@
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 
 #check if any AV files of various containers exist in the current folder.
-if ls *.mov 1> /dev/null 2>&1 || ls *.MOV 1> /dev/null 2>&1 || ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1 || ls *.mp3 1> /dev/null 2>&1 || ls *.MP3 1> /dev/null 2>&1 || ls *.wav 1> /dev/null 2>&1 || ls *.WAV 1> /dev/null 2>&1 || ls *.avi 1> /dev/null 2>&1 || ls *.AVI 1> /dev/null 2>&1 || ls *.dv 1> /dev/null 2>&1 || ls *.DV 1> /dev/null 2>&1 || ls *.mkv 1> /dev/null 2>&1 || ls *.MKV 1> /dev/null 2>&1 || ls *.mxf 1> /dev/null 2>&1 ls *.MXF 1> /dev/null 2>&1 || ls *.wave 1> /dev/null 2>&1 || ls *.WAVE 1> /dev/null 2>&1 || ls *.m4a 1> /dev/null 2>&1 || ls *.M4A 1> /dev/null 2>&1; then 
+if ls *.mov 1> /dev/null 2>&1 || ls *.MOV 1> /dev/null 2>&1 || ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1 || ls *.mpg 1> /dev/null 2>&1 || ls *.MPG 1> /dev/null 2>&1 || ls *.mp3 1> /dev/null 2>&1 || ls *.MP3 1> /dev/null 2>&1 || ls *.wav 1> /dev/null 2>&1 || ls *.WAV 1> /dev/null 2>&1 || ls *.avi 1> /dev/null 2>&1 || ls *.AVI 1> /dev/null 2>&1 || ls *.dv 1> /dev/null 2>&1 || ls *.DV 1> /dev/null 2>&1 || ls *.mkv 1> /dev/null 2>&1 || ls *.MKV 1> /dev/null 2>&1 || ls *.mxf 1> /dev/null 2>&1 ls *.MXF 1> /dev/null 2>&1 || ls *.wave 1> /dev/null 2>&1 || ls *.WAVE 1> /dev/null 2>&1 || ls *.m4a 1> /dev/null 2>&1 || ls *.M4A 1> /dev/null 2>&1; then 
 	echo 'AV files are present' | tee av_sort.log
 else
 	echo 'there are no AV files in this current directory' 
@@ -39,7 +39,7 @@ else
 fi
 
 #mp4s
-#check if mp4 extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
+#check if mpg and MPG extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
 if ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1; then 
 	echo 'mp4/MP4 extension found' | tee av_sort.log
 	#create folders for the information package
@@ -49,11 +49,17 @@ if ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1; then
 	#extract metadata using mediainfo and export to txt and xml files
 	for file in *.mp4; do mediainfo -f "$file" >"metadata_mp4/${file%.mp4}.mp4.txt"; done
 	for file in *.MP4; do mediainfo -f "$file" >"metadata_mp4/${file%.MP4}.mp4.txt"; done
+ 	for file in *.mpg; do mediainfo -f "$file" >"metadata_mp4/${file%.mpg}.mp4.txt"; done
+  	for file in *.MPG; do mediainfo -f "$file" >"metadata_mp4/${file%.MPG}.mp4.txt"; done
 	for file in *.mp4; do mediainfo -f --Output=XML "$file" >"metadata_mp4/${file%.mp4}.mp4.xml"; done
 	for file in *.MP4; do mediainfo -f --Output=XML "$file" >"metadata_mp4/${file%.MP4}.mp4.xml"; done
+	for file in *.mpg; do mediainfo -f --Output=XML "$file" >"metadata_mp4/${file%.mpg}.mp4.xml"; done
+ 	for file in *.MPG; do mediainfo -f --Output=XML "$file" >"metadata_mp4/${file%.MPG}.mp4.xml"; done
 	#move mp4 files to the objects_mp4 folder
 	mv *.mp4 ./objects_mp4
 	mv *.MP4 ./objects_mp4
+ 	mv *.mpg ./objects_mp4
+  	mv *.MPG ./objects_mp4
 	#move and rename folders to create the information package
 	mv metadata_mp4 mp4_ip
 	mv objects_mp4 mp4_ip
@@ -61,6 +67,33 @@ if ls *.mp4 1> /dev/null 2>&1 || ls *.MP4 1> /dev/null 2>&1; then
 	mv mp4_ip/objects_mp4 mp4_ip/objects
      #ifiscripts is a dependency
  	manifest.py -s mp4_ip/objects
+else
+	echo 'no files with mp4/MP4 extension found in current directory' 
+fi
+
+#mpegs other
+#check if mp4 extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
+if ls *.mpg 1> /dev/null 2>&1 || ls *.MPG 1> /dev/null 2>&1; then 
+	echo 'mpg/MPG extension found' | tee av_sort.log
+	#create folders for the information package
+	mkdir mpeg_other_ip
+	mkdir metadata_mpeg_other
+	mkdir objects_mpeg_other 
+	#extract metadata using mediainfo and export to txt and xml files
+ 	for file in *.mpg; do mediainfo -f "$file" >"metadata_mpeg_other/${file%.mpg}.mpg.txt"; done
+  	for file in *.MPG; do mediainfo -f "$file" >"metadata_mpeg_other/${file%.MPG}.mpg.txt"; done
+	for file in *.mpg; do mediainfo -f --Output=XML "$file" >"metadata_mpeg_other/${file%.mpg}.mpg.xml"; done
+ 	for file in *.MPG; do mediainfo -f --Output=XML "$file" >"metadata_mpeg_other/${file%.MPG}.mpg.xml"; done
+	#move mppeg_other files to the objects_mpeg_other folder
+ 	mv *.mpg ./objects_mpeg_other
+  	mv *.MPG ./objects_mpeg_other
+	#move and rename folders to create the information package
+	mv metadata_mpeg_other mpeg_other_ip
+	mv objects_mpeg_other mpeg_other_ip
+	mv mpeg_other_ip/metadata_mpeg_other mpeg_other_ip/metadata
+	mv mpeg_other_ip/objects_mpeg_other mpeg_other_ip/objects
+     #ifiscripts is a dependency 
+ 	manifest.py -s objects
 else
 	echo 'no files with mp4/MP4 extension found in current directory' 
 fi
