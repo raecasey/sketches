@@ -1,6 +1,6 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
-#looks for Jpegs, Tiffs, DNGs, IIQs, PNGs, NEFs and PSDs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
+#looks for Jpegs, Tiffs, DNGs, IIQs, CR2s, PNGs, NEFs and PSDs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
 
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 #JPEGS SORT
@@ -167,6 +167,37 @@ else
 	echo 'no file with IIQ extension found in current directory'
 fi
 
+#CR2S SORT
+#check if any CR2s in different extensions exist in the current folder. If any exist make three folders
+if ls *.cr2 1> /dev/null 2>&1 || ls *.CR2 1> /dev/null 2>&1; then 
+	echo 'CR2s are present'
+	mkdir cr2_ip
+	mkdir metadata_cr2
+	mkdir objects_cr2  
+else
+	echo 'there are no CR2s in this current directory'
+fi
+
+#check if .cr2 extension present. if so export .txt and .csv exiftool files to metadata_cr2 folder and move .cr2 files to objects_cr2 folder
+if ls *.cr2 1> /dev/null 2>&1; then 
+	echo 'cr2 extension found'
+	for file in *.cr2; do exiftool "$file" >"metadata_cr2/${file%.cr2}.cr2.txt"; done
+	for file in *.cr2; do exiftool -csv "$file" >"metadata_cr2/${file%.cr2}.cr2.csv"; done
+	mv *.cr2 ./objects_cr2  
+else
+	echo 'no files with cr2 extension found in current directory'
+fi
+
+#check if .CR2 extension present. if so export .txt and .csv exiftool files to metadata_cr2 folder and move .CR2 files to objects_cr2 folder
+if ls *.CR2 1> /dev/null 2>&1; then 
+	echo 'CR2 extension found'
+	for file in *.CR2; do exiftool "$file" >"metadata_cr2/${file%.CR2}.CR2.txt"; done
+	for file in *.CR2; do exiftool -csv "$file" >"metadata_cr2/${file%.CR2}.CR2.csv"; done
+	mv *.CR2 ./objects_cr2  
+else
+	echo 'no file with CR2 extension found in current directory'
+fi
+
 #NEFS SORT
 #check if any NEFs in different extensions exist in the current folder. If any exist make three folders
 if ls *.nef 1> /dev/null 2>&1 || ls *.NEF 1> /dev/null 2>&1; then 
@@ -313,6 +344,19 @@ if ls iiq_ip; then
 	echo 'iiq information package created'
 else
 	echo 'no iiq information package created'
+fi
+
+#CR2 Information Package
+if ls cr2_ip; then
+	mv metadata_cr2 cr2_ip
+	mv objects_cr2 cr2_ip
+	mv cr2_ip/metadata_cr2 cr2_ip/metadata
+	mv cr2_ip/objects_cr2 cr2_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s cr2_ip/objects
+	echo 'cr2 information package created'
+else
+	echo 'no cr2 information package created'
 fi
 
 #PNG Information Package
