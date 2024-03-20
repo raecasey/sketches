@@ -158,6 +158,34 @@ else
 	echo 'no files with mp3/MP3 extension found in current directory'
 fi
 
+#windows media audio files
+#check if wma extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
+if ls *.wma 1> /dev/null 2>&1 || ls *.WMA 1> /dev/null 2>&1; then 
+	echo 'wma/WMA extension found'
+	#create folders for the information package
+	mkdir wma_ip
+	mkdir metadata_wma
+	mkdir objects_wma 
+	#extract metadata using mediainfo and export to txt and xml files
+	for file in *.wma; do mediainfo -f "$file" >"metadata_wma/${file%.wma}.wma.txt"; done
+	for file in *.WMA; do mediainfo -f "$file" >"metadata_wma/${file%.WMA}.wma.txt"; done
+	for file in *.wma; do mediainfo -f --Output=XML "$file" >"metadata_wma/${file%.wma}.wma.xml"; done
+	for file in *.WMA; do mediainfo -f --Output=XML "$file" >"metadata_wma/${file%.WMA}.wma.xml"; done
+	#move wma files to the objects_wma folder
+	mv *.wma ./objects_wma
+	mv *.WMA ./objects_wma
+	#move and rename folders to create the information package
+	mv metadata_wma wma_ip
+	mv objects_wma wma_ip
+	mv wma_ip/metadata_wma wma_ip/metadata
+	mv wma_ip/objects_wma wma_ip/objects
+      #ifiscripts is a dependency
+ 	manifest.py -s wma_ip/objects
+else
+	echo 'no files with wma/WMA extension found in current directory'
+fi
+
+
 #AVIs
 #check if avi extensions present. if so create information package that includes extracted .txt and .xml mediainfo files.
 if ls *.avi 1> /dev/null 2>&1 || ls *.AVI 1> /dev/null 2>&1; then 
