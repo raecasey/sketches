@@ -291,6 +291,36 @@ else
 	echo 'no file with PSD extension found in current directory'
 fi
 
+#INDDS (In Design Document) SORT
+#check if any INDDs in different extensions exist in the current folder. If any exist make three folders
+if ls *.indd 1> /dev/null 2>&1 || ls *.INDD 1> /dev/null 2>&1; then 
+	echo 'INDDs are present'
+	mkdir indd_ip
+	mkdir metadata_indd
+	mkdir objects_indd  
+else
+	echo 'there are no INDDs in this current directory'
+fi
+
+#check if .indd extension present. if so export .txt and .csv exiftool files to metadata_indd folder and move .indd files to objects_indd folder
+if ls *.indd 1> /dev/null 2>&1; then 
+	echo 'indd extension found'
+	for file in *.indd; do exiftool "$file" >"metadata_indd/${file%.indd}.indd.txt"; done
+	for file in *.indd; do exiftool -csv "$file" >"metadata_indd/${file%.indd}.indd.csv"; done
+	mv *.indd ./objects_indd  
+else
+	echo 'no files with indd extension found in current directory'
+fi
+
+#check if .INDD extension present. if so export .txt and .csv exiftool files to metadata_indd folder and move .INDD files to objects_indd folder
+if ls *.INDD 1> /dev/null 2>&1; then 
+	echo 'INDD extension found'
+	for file in *.INDD; do exiftool "$file" >"metadata_indd/${file%.INDD}.INDD.txt"; done
+	for file in *.INDD; do exiftool -csv "$file" >"metadata_indd/${file%.INDD}.INDD.csv"; done
+	mv *.INDD ./objects_indd  
+else
+	echo 'no file with INDD extension found in current directory'
+fi
 
 
 #move and rename files into information package
@@ -344,6 +374,19 @@ if ls iiq_ip; then
 	echo 'iiq information package created'
 else
 	echo 'no iiq information package created'
+fi
+
+#INDD Information Package
+if ls indd_ip; then
+	mv metadata_indd indd_ip
+	mv objects_indd indd_ip
+	mv indd_ip/metadata_indd indd_ip/metadata
+	mv indd_ip/objects_indd indd_ip/objects
+ #script will break if ifiscripts not installed
+ 	manifest.py -s indd_ip/objects
+	echo 'indd information package created'
+else
+	echo 'no indd information package created'
 fi
 
 #CR2 Information Package
