@@ -1,6 +1,5 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
-#extracting mediainfo metadata for DVD digital objects
 
 for file in *.jpg; do ffmpeg -i "$file" -vf scale="iw/2:ih/2" "./halved_jpgs/${file%.jpg}_half.png"; done
 for file in *.JPG; do ffmpeg -i "$file" -vf scale="iw/2:ih/2" "./halved_jpgs/${file%.JPG}_half.png"; done
