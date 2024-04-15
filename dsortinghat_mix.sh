@@ -322,6 +322,36 @@ else
 	echo 'no file with INDD extension found in current directory'
 fi
 
+#FFFS SORT
+#check if any FFFs in different extensions exist in the current folder. If any exist make three folders
+if ls *.fff 1> /dev/null 2>&1 || ls *.FFF 1> /dev/null 2>&1; then 
+	echo 'FFFs are present'
+	mkdir fff_ip
+	mkdir metadata_fff
+	mkdir objects_fff  
+else
+	echo 'there are no FFFs in this current directory'
+fi
+
+#check if .fff extension present. if so export .txt and .csv exiftool files to metadata_fff folder and move .fff files to objects_fff folder
+if ls *.fff 1> /dev/null 2>&1; then 
+	echo 'fff extension found'
+	for file in *.fff; do exiftool "$file" >"metadata_fff/${file%.fff}.fff.txt"; done
+	for file in *.fff; do exiftool -csv "$file" >"metadata_fff/${file%.fff}.fff.csv"; done
+	mv *.fff ./objects_fff  
+else
+	echo 'no files with fff extension found in current directory'
+fi
+
+#check if .FFF extension present. if so export .txt and .csv exiftool files to metadata_fff folder and move .FFF files to objects_fff folder
+if ls *.FFF 1> /dev/null 2>&1; then 
+	echo 'FFF extension found'
+	for file in *.FFF; do exiftool "$file" >"metadata_fff/${file%.FFF}.FFF.txt"; done
+	for file in *.FFF; do exiftool -csv "$file" >"metadata_fff/${file%.FFF}.FFF.csv"; done
+	mv *.FFF ./objects_fff  
+else
+	echo 'no file with FFF extension found in current directory'
+fi
 
 #move and rename files into information package
 #Jpeg Information Package
@@ -440,4 +470,19 @@ if ls nef_ip; then
 else
 	echo 'no nef information package created'
 fi
+
+#FFF Information Package
+if ls fff_ip; then
+	mv metadata_fff fff_ip
+	mv objects_fff fff_ip
+	mv fff_ip/metadata_fff fff_ip/metadata
+	mv fff_ip/objects_fff fff_ip/objects
+ #script will break if ifiscripts not installed
+ 	cd fff_ip/objects 
+	manifest.py -s fff_ip/objects
+	echo 'fff information package created'
+else
+	echo 'no fff information package created'
+fi
+
 echo 'THIS SCRIPT IS NOT RECURSIVE'
