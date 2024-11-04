@@ -1,6 +1,7 @@
 #!/bin/bash
 #script written by Raelene Casey 2024
 #looks for Jpegs, Tiffs, DNGs, IIQs, CR2s, PNGs, NEFs and PSDs in current directory. if images are found they are sorted into an information packages with exiftool metadata extracted according to their format.
+##need to add more formats
 
 echo 'PLEASE READ THE OUTPUT CAREFULLY'
 #JPEGS SORT
