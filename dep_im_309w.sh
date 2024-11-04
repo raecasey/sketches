@@ -1,6 +1,10 @@
 #!/bin/bash
 #ffmpeg is a dependency
 
+#this script is for browse images on epexio discovery - using the width stipulated by metadatis staff
+
+
+
 #create folder withing current directory to hold newly created jpegs
 mkdir 309width_jpgs
 
